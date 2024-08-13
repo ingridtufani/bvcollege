@@ -3,43 +3,84 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Weather in Calgary</title>
+    <title>Weather Forecast</title>
+    <link rel="stylesheet" href="styles/style.css">
 </head>
 <body>
-    <h1>Current Weather in Calgary</h1>
-    <div id="weather">
-        <p>Temperature: <span id="temperature">Loading...</span> °C</p>
-        <p>Condition: <span id="description">Loading...</span></p>
+    <div id="weather-container">
+        <h1 id="location">Loading...</h1>
+        <div class="icon" id="icon">☀️</div>
+        <div class="temp"><span id="temperature">Loading...</span> °C</div>
+        <p id="description">Loading...</p>
     </div>
 
     <script>
         // Replace 'YOUR_API_KEY' with your actual OpenWeatherMap API key
         const apiKey = '3ff0e09685004704a28fad8b08de23d6';
-        const city = 'Calgary';
-        const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`;
 
-        // Fetch weather data
-        fetch(apiUrl)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.json();
-            })
-            .then(data => {
-                // Extract temperature and weather description
-                const temperature = data.main.temp;
-                const description = data.weather[0].description;
+        // Function to fetch weather based on user's location
+        function fetchWeather(lat, lon) {
+            const apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${apiKey}`;
 
-                // Update the DOM elements
-                document.getElementById('temperature').textContent = temperature;
-                document.getElementById('description').textContent = description;
-            })
-            .catch(error => {
-                console.error('Error fetching weather data:', error);
-                document.getElementById('temperature').textContent = 'Error';
-                document.getElementById('description').textContent = 'Error';
+            fetch(apiUrl)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    const temperature = Math.round(data.main.temp);
+                    const description = data.weather[0].description;
+                    const location = data.name;
+                    const weatherIcon = getWeatherIcon(data.weather[0].main);
+
+                    document.getElementById('temperature').textContent = temperature;
+                    document.getElementById('description').textContent = description;
+                    document.getElementById('location').textContent = `Current Weather in ${location}`;
+                    document.getElementById('icon').textContent = weatherIcon;
+                })
+                .catch(error => {
+                    console.error('Error fetching weather data:', error);
+                    document.getElementById('temperature').textContent = 'Error';
+                    document.getElementById('description').textContent = 'Error';
+                    document.getElementById('location').textContent = 'Unable to fetch weather data';
+                });
+        }
+
+        // Function to get weather icon
+        function getWeatherIcon(condition) {
+            switch (condition.toLowerCase()) {
+                case 'clear':
+                    return '☀️';
+                case 'clouds':
+                    return '☁️';
+                case 'rain':
+                case 'drizzle':
+                    return '🌧️';
+                case 'thunderstorm':
+                    return '⛈️';
+                case 'snow':
+                    return '❄️';
+                case 'mist':
+                case 'fog':
+                    return '🌫️';
+                default:
+                    return '☁️';
+            }
+        }
+
+        // Get user's location and fetch weather
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(position => {
+                fetchWeather(position.coords.latitude, position.coords.longitude);
+            }, error => {
+                console.error('Error getting location:', error);
+                document.getElementById('location').textContent = 'Location access denied';
             });
+        } else {
+            document.getElementById('location').textContent = 'Geolocation not supported by your browser';
+        }
     </script>
 </body>
 </html>
