@@ -3,9 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Weather in Calgary</title>
 </head>
 <body>
-    
+    <h1>Current Weather in Calgary</h1>
+    <div id="weather">
+        <p>Temperature: <span id="temperature">Loading...</span> °C</p>
+        <p>Condition: <span id="description">Loading...</span></p>
+    </div>
+
+    <script>
+        // Replace 'YOUR_API_KEY' with your actual OpenWeatherMap API key
+        const apiKey = '3ff0e09685004704a28fad8b08de23d6';
+        const city = 'Calgary';
+        const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`;
+
+        // Fetch weather data
+        fetch(apiUrl)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                // Extract temperature and weather description
+                const temperature = data.main.temp;
+                const description = data.weather[0].description;
+
+                // Update the DOM elements
+                document.getElementById('temperature').textContent = temperature;
+                document.getElementById('description').textContent = description;
+            })
+            .catch(error => {
+                console.error('Error fetching weather data:', error);
+                document.getElementById('temperature').textContent = 'Error';
+                document.getElementById('description').textContent = 'Error';
+            });
+    </script>
 </body>
 </html>
