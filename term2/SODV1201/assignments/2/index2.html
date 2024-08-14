@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BVC Sport Club - Retrieve Registered Users</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        h1 {
+            color: #eb22ab;
+            text-align: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table, th, td {
+            border: 3px solid #eb22ab;
+            padding: 10px;
+        }
+        th {
+            background-color: #d923dc;
+        }
+    </style>
+</head>
+<body>
+    <h1>Registered Users for BVC Sport Club Event</h1>
+    
+    <button id="fetchUsers">Fetch All Registered Users</button>
+    
+    <table id="usersTable" style="display: none;">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Full Name</th>
+                <th>Address</th>
+                <th>Status</th>
+                <th>Registration Fee</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <script>
+        // Function simulating the API returning registered users
+        function fetchAllUsers() {
+            const users = JSON.parse(localStorage.getItem('users')) || [];
+            return users;
+        }
+
+        // Function to display data in the table
+        document.getElementById('fetchUsers').addEventListener('click', function() {
+            const users = fetchAllUsers();
+
+            if (users.length > 0) {
+                const usersTable = document.getElementById('usersTable');
+                const tableBody = usersTable.querySelector('tbody');
+                tableBody.innerHTML = ''; // Clean the table before
+
+                users.forEach(user => {
+                    const row = document.createElement('tr');
+
+                    // Create row cells
+                    row.innerHTML = `
+                        <td>${user.id}</td>
+                        <td>${user.name}</td>
+                        <td>${user.address}</td>
+                        <td>${user.status}</td>
+                        <td>$${user.fee}</td>
+                    `;
+
+                    tableBody.appendChild(row);
+                });
+
+                // Show the table
+                usersTable.style.display = 'table';
+            } else {
+                alert("No users are registered yet.");
+            }
+        });
+    </script>
+</body>
+</html>

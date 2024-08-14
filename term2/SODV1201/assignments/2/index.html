@@ -4,7 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather Forecast</title>
-    <link rel="stylesheet" href="styles/style.css">
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    background-color: #f5cde9;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+#weather-container {
+    text-align: center;
+    background: rgba(238, 148, 205, 0.8);
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+h1 {
+    color: #f133c2;
+}
+.icon {
+    font-size: 50px;
+    margin-bottom: 10px;
+}
+.temp {
+    font-size: 40px;
+    color: #2e09bf;
+}
+    </style>
 </head>
 <body>
     <div id="weather-container">
@@ -15,7 +44,7 @@
     </div>
 
     <script>
-        // Replace 'YOUR_API_KEY' with your actual OpenWeatherMap API key
+
         const apiKey = '3ff0e09685004704a28fad8b08de23d6';
 
         // Function to fetch weather based on user's location

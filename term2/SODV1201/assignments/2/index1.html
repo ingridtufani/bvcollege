@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BVC Sport Club Registration</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            color: rgb(238, 63, 200);
+            text-align: center;
+        }
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 10px;
+            border: 1px solid #290e1e;
+            background-color: #fcc4f3;
+        }
+        label, input, select {
+            display: block;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+        button {
+            padding: 10px;
+            background-color: #af4ca8;
+            color: rgb(255, 255, 255);
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #8e358b;
+        }
+        .confirmation {
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px solid rgb(45, 0, 128);
+            background-color: #e7ffe7;
+        }
+    </style>
+</head>
+<body>
+    <h1>Register for the Event</h1>
+    <form id="registrationForm">
+        <label for="id">ID:</label>
+        <input type="text" id="id" name="id" required>
+        
+        <label for="name">Full Name:</label>
+        <input type="text" id="name" name="name" required>
+        
+        <label for="address">Address:</label>
+        <input type="text" id="address" name="address" required>
+        
+        <label for="status">Status:</label>
+        <select id="status" name="status" required>
+            <option value="student">Student</option>
+            <option value="staff">Staff</option>
+            <option value="volunteer">Volunteer</option>
+        </select>
+
+        <button type="submit">Register</button>
+    </form>
+
+    <div id="confirmationMessage" class="confirmation" style="display:none;"></div>
+
+    <script>
+        document.getElementById('registrationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // Get form data
+            const userId = document.getElementById('id').value;
+            const fullName = document.getElementById('name').value;
+            const address = document.getElementById('address').value;
+            const status = document.getElementById('status').value;
+
+            // Calculate registration fee
+            let fee;
+            if (status === 'student') {
+                fee = 10;
+            } else if (status === 'staff') {
+                fee = 50;
+            } else {
+                fee = 0;
+            }
+
+            // Create user object
+            const user = {
+                id: userId,
+                name: fullName,
+                address: address,
+                status: status,
+                fee: fee
+            };
+
+            // localStorage 
+            let users = JSON.parse(localStorage.getItem('users')) || [];
+            users.push(user);
+            localStorage.setItem('users', JSON.stringify(users));
+
+            // Confirmation message
+            const confirmationMessage = document.getElementById('confirmationMessage');
+            confirmationMessage.style.display = 'block';
+            confirmationMessage.innerHTML = `Thank you for registering, ${fullName}!<br>
+                                             ID: ${userId}<br>
+                                             Address: ${address}<br>
+                                             Status: ${status}<br>
+                                             Registration Fee: $${fee}`;
+
+            // Clean form
+            document.getElementById('registrationForm').reset();
+        });
+    </script>
+</body>
+</html>
