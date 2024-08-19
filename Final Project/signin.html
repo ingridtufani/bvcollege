@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <link rel="stylesheet" href="styles.css" />
+        <script src="script.js" defer></script>
+    </head>
+    <body>
+        <h1>Signin</h1>
+
+        <form>
+            <p>Username</p>
+            <input
+                type="text"
+                id="signin-username"
+                name="username"
+                placeholder="Username"
+                required
+            /><br />
+
+            <p>Password</p>
+            <input
+                type="password"
+                id="signin-password"
+                name="password"
+                placeholder="Password"
+                required
+            /><br />
+
+            <p>Name</p>
+            <input
+                type="text"
+                id="signin-name"
+                name="name"
+                placeholder="Your Name"
+                required
+            /><br />
+
+            <p>Phone</p>
+            <input
+                type="tel"
+                id="signin-phone"
+                name="phone"
+                placeholder="(111) 222-3333"
+                pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+                required
+                title="Please enter a valid phone number in the format: 123-456-7890"
+            /><br />
+
+            <p>Email</p>
+            <input
+                type="email"
+                id="signin-email"
+                name="email"
+                placeholder="myemail@example.com"
+                required
+            /><br />
+
+            <p>Role:</p>
+            <input
+                type="radio"
+                id="ownerRole"
+                name="role"
+                value="Owner"
+                required
+            />
+            <label for="ownerRole">Owner</label><br />
+            <input
+                type="radio"
+                id="coworkerRole"
+                name="role"
+                value="Coworker"
+            />
+            <label for="coworkerRole">Coworker</label><br /><br />
+
+            <input
+                type="submit"
+                value="Submit"
+                onclick="sendSigninInfo()"
+            /><br /><br />
+        </form>
+
+        <footer>
+            © Rent your place by IDONTKNOW group | All Rights Reserved
+        </footer>
+    </body>
+</html>
