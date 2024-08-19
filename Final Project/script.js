@@ -45,3 +45,30 @@ function sendSigninInfo() {
     })
     .catch(error => console.error('Error:', error));
 }
+
+function checkUsername() {
+    const username = document.getElementById('forgot-username').value;
+
+    fetch('/forgot-password', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username }),
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log(data); // Adicione esta linha para depuração
+        if (data.success) {
+            alert(`Your password is: ${data.password}`);
+        } else {
+            alert('Username does not exist.');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+
+    return false; // Impede o envio padrão do formulário
+}
+

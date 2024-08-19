@@ -1,1 +1,7 @@
 username: Leo1234, password: Teste1223
+username: teste, password: teste
+username: teste2, password: teste2
+username: teste3, password: teste2
+username: calgary, password: calgary10
+username: calgary, password: calgary10
+username: calgary, password: calgary10

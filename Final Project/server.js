@@ -106,3 +106,16 @@ app.post('/signin', (req, res) => {
     res.json({ success: true });
 });
 
+app.post('/forgot-password', (req, res) => {
+    const { username } = req.body;
+    const user = users.find(u => u.username === username);
+
+    if (user) {
+        res.json({ success: true, password: user.password });
+    } else {
+        res.json({ success: false });
+    }
+});
+
+
+
