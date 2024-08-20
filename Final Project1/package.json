@@ -11,9 +11,13 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+<<<<<<< Updated upstream:Final Project1/package.json
     "express": "^4.19.2",
     "install": "^0.13.0",
     "nodemailer": "^6.9.14",
     "npm": "^10.8.2"
+=======
+    "express": "^4.19.2"
+>>>>>>> Stashed changes:Final Project/package.json
   }
 }

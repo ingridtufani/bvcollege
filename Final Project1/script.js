@@ -46,6 +46,7 @@ function sendSigninInfo() {
     .catch(error => console.error('Error:', error));
 }
 
+<<<<<<< Updated upstream:Final Project1/script.js
 
 // forgot password
 function checkUsername() {
@@ -73,4 +74,37 @@ function checkUsername() {
 
     return false; 
 }
+=======
+// Forgot password
+
+document.getElementById("forgotPasswordForm").addEventListener("submit", function (e) {
+    e.preventDefault(); // Evita o envio do formulário
+
+    const emailInput = document.getElementById("forgot-password-email").value;
+    const responseMessage = document.getElementById("responseMessage");
+
+    // Faz uma requisição ao backend para verificar o e-mail
+    fetch(`/recover-password?email=${encodeURIComponent(emailInput)}`)
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                // Exibe a mensagem de sucesso no frontend e alerta ao usuário
+                responseMessage.textContent = data.message;
+                responseMessage.style.color = "green";
+                alert("Password recovery email has been sent successfully!");
+            } else {
+                // Exibe a mensagem de erro no frontend
+                responseMessage.textContent = data.message;
+                responseMessage.style.color = "red";
+                alert("Error: Email not found. Please try again.");
+            }
+        })
+        .catch(error => {
+            console.error("Erro:", error);
+            responseMessage.textContent = "Ocorreu um erro. Tente novamente.";
+            responseMessage.style.color = "red";
+            alert("An error occurred. Please try again.");
+        });
+});
+>>>>>>> Stashed changes:Final Project/script.js
 
