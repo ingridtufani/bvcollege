@@ -1,5 +1,5 @@
 //SODV1201 JS code GLA1
-//Name:   //ID
+//Name: Ingrid Tufani Savioli  //ID 456879
 //--------------------------------------------------------------------------------------------
 //Q1 
 //Define an array named myArray with the following 

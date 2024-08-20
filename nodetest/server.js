@@ -210,7 +210,7 @@ app.post("/login", (req, res) => {
     }
 });
 
-app.post("/signin", (req, res) => {
+app.post("/signup", (req, res) => {
     const { username, password, name, phone, email, role } = req.body;
 
     const userExists = users.some((u) => u.username === username);

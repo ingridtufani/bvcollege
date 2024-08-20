@@ -68,7 +68,7 @@ function clearError(inputId) {
 }
 
 function validateUsername() {
-    const username = document.getElementById('signin-username').value;
+    const username = document.getElementById('signup-username').value;
     if (username.trim() === '') {
         showError('username', 'Username cannot be empty.');
     } else {
@@ -85,7 +85,7 @@ function validateUsername() {
 }
 
 function validateEmail() {
-    const email = document.getElementById('signin-email').value;
+    const email = document.getElementById('signup-email').value;
     if (email.trim() === '') {
         showError('email', 'Email cannot be empty.');
     } else {
@@ -102,7 +102,7 @@ function validateEmail() {
 }
 
 function validatePhone() {
-    const phone = document.getElementById('signin-phone').value;
+    const phone = document.getElementById('signup-phone').value;
     if (phone.trim() === '') {
         showError('phone', 'Phone cannot be empty.');
     } else {
@@ -118,12 +118,12 @@ function validatePhone() {
     }
 }
 
-function sendSigninInfo() {
-    const username = document.getElementById('signin-username').value;
-    const password = document.getElementById('signin-password').value;
-    const name = document.getElementById('signin-name').value;
-    const phone = document.getElementById('signin-phone').value;
-    const email = document.getElementById('signin-email').value;
+function sendsignupInfo() {
+    const username = document.getElementById('signup-username').value;
+    const password = document.getElementById('signup-password').value;
+    const name = document.getElementById('signup-name').value;
+    const phone = document.getElementById('signup-phone').value;
+    const email = document.getElementById('signup-email').value;
     const role = document.querySelector('input[name="role"]:checked').value;
 
     if (username.trim() === '' || email.trim() === '' || phone.trim() === '' || password.trim() === '') {
@@ -134,7 +134,7 @@ function sendSigninInfo() {
     checkAvailability(username, email, phone)
     .then(data => {
         if (data.success) {
-            return fetch('/signin', {
+            return fetch('/signup', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -151,11 +151,11 @@ function sendSigninInfo() {
         if (data.success) {
             alert('Sign-in successful!');
 
-            document.getElementById('signin-username').value = '';
-            document.getElementById('signin-password').value = '';
-            document.getElementById('signin-name').value = '';
-            document.getElementById('signin-phone').value = '';
-            document.getElementById('signin-email').value = '';
+            document.getElementById('signup-username').value = '';
+            document.getElementById('signup-password').value = '';
+            document.getElementById('signup-name').value = '';
+            document.getElementById('signup-phone').value = '';
+            document.getElementById('signup-email').value = '';
             document.querySelector('input[name="role"]:checked').checked = false;
             clearError('username');
             clearError('email');
@@ -167,6 +167,6 @@ function sendSigninInfo() {
     .catch(error => console.error('Error:', error));
 }
 
-document.getElementById('signin-username').addEventListener('input', validateUsername);
-document.getElementById('signin-email').addEventListener('input', validateEmail);
-document.getElementById('signin-phone').addEventListener('input', validatePhone);
+document.getElementById('signup-username').addEventListener('input', validateUsername);
+document.getElementById('signup-email').addEventListener('input', validateEmail);
+document.getElementById('signup-phone').addEventListener('input', validatePhone);
