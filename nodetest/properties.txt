@@ -1,0 +1,2 @@
+id: 2, address: sjhdkjahsdkjhakj, neighborhood: hdkjhaskdjhkajshfds, squareFeet: 600, parkingGarage: true, publicTransportation: true
+id: 3, address: kdjslkjd, neighborhood: dkjasldkj, squareFeet: 500, parkingGarage: false, publicTransportation: false

@@ -5,13 +5,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Sign-In</title>
         <link rel="stylesheet" href="styles.css" />
-        <script src="script.js" defer></script> <!-- Certifique-se de que o arquivo script.js está no mesmo diretório -->
     </head>
     <body>
         <h1>Signin</h1>
 
-        <!-- Adicionei o ID ao formulário -->
-        <form id="signin-form">
+        <form id="signin-form" action="#" method="post">
             <p>Username</p>
             <input
                 type="text"
@@ -40,15 +38,11 @@
             /><br />
 
             <p>Phone</p>
-            <input
-                type="tel"
-                id="signin-phone"
-                name="phone"
-                placeholder="(111) 222-3333"
-                pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
-                required
-                title="Please enter a valid phone number in the format: 123-456-7890"
-            /><br />
+            <input type="tel" id="signin-phone" name="phone" 
+                pattern="\d{3} \d{3}-\d{4}" 
+                title="Please enter a valid phone number in the format: 123 222-4444" 
+                required>
+            <br />
 
             <p>Email</p>
             <input
@@ -76,14 +70,38 @@
             />
             <label for="coworkerRole">Coworker</label><br /><br />
 
+            <!-- Botão para Owner -->
+            <a href="owner.html" id="owner-button" class="button" style="display:none;">Submit as Owner</a>
+            <!-- Botão para Coworker -->
+            <a href="coworker.html" id="coworker-button" class="button" style="display:none;">Submit as Coworker</a>
+
             <input
                 type="submit"
                 value="Submit"
+                onclick="handleRoleSelection(event)"
             /><br /><br />
         </form>
 
         <footer>
             © Rent your place by IDONTKNOW group | All Rights Reserved
         </footer>
+
+        <script>
+            function handleRoleSelection(event) {
+                event.preventDefault(); 
+                const role = document.querySelector('input[name="role"]:checked');
+
+                if (role) {
+                    const roleValue = role.value;
+                    if (roleValue === 'Owner') {
+                        document.getElementById('owner-button').click();
+                    } else if (roleValue === 'Coworker') {
+                        document.getElementById('coworker-button').click();
+                    }
+                } else {
+                    alert('Please select a role.');
+                }
+            }
+        </script>
     </body>
 </html>
