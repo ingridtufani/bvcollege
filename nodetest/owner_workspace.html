@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <h1>Owner Workspace</h1>
+
+    <form>
+        <p>Room Type</p>
+        <input type="radio" id="workspace-meetingRoom" name="room-type" value="Meeting Room" required>
+        <label for="workspace-meetingRoom">Meeting Room</label><br>
+        <input type="radio" id="workspace-private-office-room" name="room-type" value="Private Office Room">
+        <label for="workspace-private-office-room">Private Office Room</label><br>
+        <input type="radio" id="workspace-desk" name="room-type" value="Desk">
+        <label for="workspace-desk">Desk</label><br><br>
+
+        <p>Lease Term </p>
+        <input type="radio" id="workspace-term-daily" name="lease-term" value="Daily" required>
+        <label for="workspace-lease-daily">Daily</label><br>
+        <input type="radio" id="workspace-term-weekly" name="lease-term" value="Weekly">
+        <label for="workspace-term-weekly">Weekly</label><br>
+        <input type="radio" id="workspace-term-monthly" name="lease-term" value="Monthly">
+        <label for="workspace-term-monthly">Monthly</label><br><br>
+
+        <p>Available Seats</p>
+        <input type="number" id="property-available-seats" name="available-seats" placeholder="40" required><br>
+
+        <p>Smoking Allowed</p>
+        <input type="checkbox" id="workspace-smoking" name="smoking"><br>
+
+        <p>Deactivate Workspace</p>
+        <input type="checkbox" id="workspace-deactivate" name="deactivate"><br><br>
+
+        <input type="submit" value="Submit" onclick="sendWorkspaceInfo()"><br><br>
+    </form>
+
+    <footer>© Rent your place by IDONTKNOW group | All Rights Reserved</footer>
+</body>
+</html>

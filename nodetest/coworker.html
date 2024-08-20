@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <link rel="stylesheet" href="styles.css" />
+        <script src="script.js" defer></script>
+    </head>
+    <body>
+        <style>
+            #filtered-list-div {
+                margin-top: 20px;
+            }
+
+            #filtered-list li {
+                padding: 10px;
+                border-bottom: 1px solid #ccc;
+                list-style-type: none;
+            }
+        </style>
+        <h1>Coworker</h1>
+        <p>Search Workspace</p>
+        <input type="search" id="workspace-search" name="search" required />
+        <button id="search-button">Search</button>
+        <br /><br />
+
+        <div id="filtered-list-div">
+            <ul id="filtered-list">
+                <!-- Criar os li's necessarios -->
+            </ul>
+        </div>
+
+        <footer>
+            © Rent your place by IDONTKNOW group | All Rights Reserved
+        </footer>
+        <script>
+            document
+                .getElementById("search-button")
+                .addEventListener("click", function () {
+                    const query = document
+                        .getElementById("workspace-search")
+                        .value.toLowerCase();
+                    fetch(`/api/properties`) // Fazendo a requisição para obter todas as propriedades
+                        .then((response) => response.json())
+                        .then((properties) => {
+                            let results = [];
+
+                            // Filtrar propriedades
+                            properties.forEach((property) => {
+                                if (
+                                    property.address
+                                        .toLowerCase()
+                                        .includes(query) ||
+                                    property.neighborhood
+                                        .toLowerCase()
+                                        .includes(query)
+                                ) {
+                                    results.push({
+                                        type: "Property",
+                                        name: property.address,
+                                        neighborhood: property.neighborhood,
+                                    });
+                                }
+                            });
+
+                            // Filtrar workspaces de cada propriedade
+                            properties.forEach((property) => {
+                                fetch(
+                                    `/api/properties/${property.id}/workspaces`,
+                                )
+                                    .then((response) => response.json())
+                                    .then((workspaces) => {
+                                        workspaces.forEach((workspace) => {
+                                            if (
+                                                workspace.name
+                                                    .toLowerCase()
+                                                    .includes(query) ||
+                                                workspace.roomType
+                                                    .toLowerCase()
+                                                    .includes(query)
+                                            ) {
+                                                results.push({
+                                                    type: "Workspace",
+                                                    name: workspace.name,
+                                                    roomType:
+                                                        workspace.roomType,
+                                                    property: property.address,
+                                                });
+                                            }
+                                        });
+
+                                        displayResults(results);
+                                    });
+                            });
+                        });
+                });
+
+            function displayResults(results) {
+                const list = document.getElementById("filtered-list");
+                list.innerHTML = ""; // Limpar os resultados anteriores
+
+                if (results.length === 0) {
+                    list.innerHTML = "<li>No results found</li>";
+                    return;
+                }
+
+                results.forEach((result) => {
+                    const li = document.createElement("li");
+                    if (result.type === "Property") {
+                        li.textContent = `Property: ${result.name}, Neighborhood: ${result.neighborhood}`;
+                    } else {
+                        li.textContent = `Workspace: ${result.name}, Room Type: ${result.roomType}, Property: ${result.property}`;
+                    }
+                    list.appendChild(li);
+                });
+            }
+        </script>
+    </body>
+</html>

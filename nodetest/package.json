@@ -1,0 +1,16 @@
+{
+  "name": "my-project",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "fs": "^0.0.1-security",
+    "nodemailer": "^6.9.14",
+    "vite": "^5.0.12"
+  }
+}

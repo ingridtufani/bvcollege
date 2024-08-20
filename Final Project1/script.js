@@ -46,6 +46,8 @@ function sendSigninInfo() {
     .catch(error => console.error('Error:', error));
 }
 
+
+// forgot password
 function checkUsername() {
     const username = document.getElementById('forgot-username').value;
 
@@ -58,7 +60,7 @@ function checkUsername() {
     })
     .then(response => response.json())
     .then(data => {
-        console.log(data); // Adicione esta linha para depuração
+        console.log(data); 
         if (data.success) {
             alert(`Your password is: ${data.password}`);
         } else {
@@ -69,6 +71,6 @@ function checkUsername() {
         console.error('Error:', error);
     });
 
-    return false; // Impede o envio padrão do formulário
+    return false; 
 }
 
